@@ -1,8 +1,20 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import axios from '../utils/axios';
+
+type LoginRequest = {
+  loginUserId: string;
+  password: string;
+};
+
+type LoginRespone = {
+  accessToken: string;
+};
 
 function Login() {
   const [loginId, setLoginId] = useState('');
   const [password, setPassword] = useState('');
+  const history = useHistory();
 
   const handleIdInput = (event: any) => {
     setLoginId(event.target.value);
@@ -12,11 +24,31 @@ function Login() {
     setPassword(event.target.value);
   };
 
-  const handleLogin = (e: any) => {
-    e.preventDefault();
+  const handleLogin = async (event: any) => {
+    event.preventDefault();
 
-    // eslint-disable-next-line no-console
-    console.log(`id: ${loginId} password: ${password}`);
+    const body: LoginRequest = {
+      loginUserId: loginId,
+      password,
+    };
+
+    try {
+      const { data } = await axios.post<LoginRespone>('/auth/login', body);
+
+      // eslint-disable-next-line no-console
+      console.log('Access Token', data.accessToken);
+      alert('로그인 성공');
+
+      history.push('/');
+    } catch (e) {
+      let errMsg = '';
+
+      if (e.response) {
+        errMsg = e.response.data.message;
+      }
+
+      alert(`로그인 도중 오류가 발생했습니다. ${errMsg}`);
+    }
   };
 
   return (
