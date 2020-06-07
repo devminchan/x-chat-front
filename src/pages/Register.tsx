@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import axios from '../utils/axios';
 
 type CreateUserDto = {
@@ -12,6 +13,9 @@ function Register() {
   const [password, setPassword] = useState('');
   const [repassword, setRepassword] = useState('');
   const [username, setUsername] = useState('');
+
+  // For navigating
+  const history = useHistory();
 
   const handleIdInput = (event: any) => {
     setLoginId(event.target.value);
@@ -47,6 +51,8 @@ function Register() {
     try {
       await axios.post('/users', body);
       alert('성공적으로 회원가입을 완료했습니다.');
+
+      history.push('/');
     } catch (e) {
       alert(`회원가입 도중 오류발생`);
 
