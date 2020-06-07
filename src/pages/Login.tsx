@@ -34,9 +34,19 @@ function Login() {
 
     try {
       const { data } = await axios.post<LoginRespone>('/auth/login', body);
+      localStorage.setItem('token', data.accessToken);
 
-      // eslint-disable-next-line no-console
-      console.log('Access Token', data.accessToken);
+      axios.interceptors.request.use(
+        (config) => {
+          // eslint-disable-next-line no-param-reassign
+          config.headers.Authorization = `bearer ${data.accessToken}`;
+          return config;
+        },
+        (error) => {
+          Promise.reject(error);
+        },
+      );
+
       alert('로그인 성공');
 
       history.push('/');
