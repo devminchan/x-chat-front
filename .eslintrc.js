@@ -33,7 +33,7 @@ module.exports = {
       },
     ],
     'no-alert': 'off',
-    'react-hooks/exhaustive-deps': 'off',
+    'no-unused-vars': 'off',
   },
   settings: {
     'import/resolver': {

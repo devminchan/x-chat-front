@@ -1,8 +1,7 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
-// eslint-disable-next-line no-unused-vars
 import UserContext, { IUserState } from '../context/UserContext';
-// eslint-disable-next-line no-unused-vars
-import IUser from '../entities/User';
+import IUser from '../entities/IUser';
 
 function UserProvider(props: any) {
   const { children } = props;

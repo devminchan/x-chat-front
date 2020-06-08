@@ -1,43 +1,54 @@
-import React, { useEffect, useContext, useCallback } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from '../utils/axios';
-// eslint-disable-next-line no-unused-vars
-import IUser from '../entities/User';
+import IUser from '../entities/IUser';
+import IRoom from '../entities/IRoom';
 
 import UserContext from '../context/UserContext';
 
 function Main() {
   const history = useHistory();
   const { state, setState } = useContext(UserContext);
+  const [roomList, setRoomList] = useState<IRoom[]>();
 
-  const fetchUserInfo = useCallback(async () => {
+  const fetchUserInfo = async () => {
     try {
       const user = (await axios.get('/users/me')).data as IUser;
-      // eslint-disable-next-line no-console
       setState(user);
     } catch (e) {
       if (e.response && e.response.data.statusCode === 401) {
         history.push('/login');
       } else {
         alert('유저 정보를 불러올 수 없습니다!');
-        // eslint-disable-next-line no-console
-        console.error(e);
       }
     }
-  }, [setState, history]);
+  };
+
+  const getRoomList = async () => {
+    try {
+      const fetchedRoomList = (await axios.get('/rooms')).data as IRoom[];
+
+      setRoomList(fetchedRoomList);
+    } catch (e) {
+      alert('룸 정보를 불러올 수 없습니다!');
+    }
+  };
 
   useEffect(() => {
-    fetchUserInfo();
-  }, [fetchUserInfo]);
+    fetchUserInfo().then(getRoomList);
+    // eslint-disable-next-line
+  }, []);
 
-  const itemList = [
-    <li>
-      <div>
-        <h3>#연애 상담</h3>
-        <h4>요즘 외로우신가요?</h4>
-      </div>
-    </li>,
-  ];
+  const itemList = roomList?.map((room) => {
+    return (
+      <li>
+        <div>
+          <h3>{room.roomTitle}</h3>
+          <h4>{room.roomSubtitle}</h4>
+        </div>
+      </li>
+    );
+  });
 
   return (
     <div>

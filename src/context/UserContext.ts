@@ -1,8 +1,6 @@
 import { createContext } from 'react';
-// eslint-disable-next-line no-unused-vars
-import IUser from '../entities/User';
+import IUser from '../entities/IUser';
 
-// eslint-disable-next-line no-unused-vars
 export interface IUserState {
   state?: IUser;
   setState: (user: IUser) => void;
