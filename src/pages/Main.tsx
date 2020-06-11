@@ -20,6 +20,7 @@ function Main() {
         history.push('/login');
       } else {
         alert('유저 정보를 불러올 수 없습니다!');
+        throw e;
       }
     }
   };
@@ -31,12 +32,14 @@ function Main() {
       setRoomList(fetchedRoomList);
     } catch (e) {
       alert('룸 정보를 불러올 수 없습니다!');
+      throw e;
     }
   };
 
   useEffect(() => {
-    fetchUserInfo().then(getRoomList);
-    // eslint-disable-next-line
+    fetchUserInfo()
+      .then(getRoomList)
+      .catch((e) => {});
   }, []);
 
   const itemList = roomList?.map((room) => {
