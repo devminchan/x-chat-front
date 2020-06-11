@@ -18,6 +18,7 @@ function Main() {
     } catch (e) {
       if (e.response && e.response.data.statusCode === 401) {
         history.push('/login');
+        throw e;
       } else {
         alert('유저 정보를 불러올 수 없습니다!');
         throw e;
@@ -40,6 +41,7 @@ function Main() {
     fetchUserInfo()
       .then(getRoomList)
       .catch((e) => {});
+    // eslint-disable-next-line
   }, []);
 
   const itemList = roomList?.map((room) => {
