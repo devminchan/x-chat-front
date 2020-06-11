@@ -1,7 +1,6 @@
 import axios from 'axios';
 
-const SERVER_URL =
-  'http://x-chat-elb-966956558.ap-northeast-2.elb.amazonaws.com';
+const SERVER_URL = 'https://api.dev-xchat.com';
 
 const accessToken = localStorage.getItem('token');
 
