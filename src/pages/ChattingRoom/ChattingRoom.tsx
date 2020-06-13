@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { match as Match } from 'react-router-dom';
-import axios from '../utils/axios';
-import IRoom from '../entities/IRoom';
-import IChatRecord from '../entities/IChatRecord';
+import axios from '../../utils/axios';
+import IRoom from '../../entities/IRoom';
+import IChatRecord from '../../entities/IChatRecord';
+import './ChattingRoom.css';
 
 interface RoomParamMatch extends Match {
   params: {
@@ -63,8 +64,8 @@ function ChattingRoom({ match }: { match: RoomParamMatch }) {
         <h1>{roomInfo?.roomTitle}</h1>
         <h3>{roomInfo?.roomSubtitle}</h3>
       </header>
-      <div>
-        <ul>{chatRecordElements}</ul>
+      <div className="room-body">
+        <ul className="chat-container">{chatRecordElements}</ul>
       </div>
     </div>
   );

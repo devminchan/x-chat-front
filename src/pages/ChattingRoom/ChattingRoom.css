@@ -1,0 +1,10 @@
+.room-body {
+  display: flex;
+  justify-content: center;
+}
+
+.chat-container {
+  overflow: scroll;
+  width: 400px;
+  height: 480px;
+}
