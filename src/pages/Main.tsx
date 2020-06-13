@@ -1,5 +1,5 @@
 import React, { useEffect, useContext, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import axios from '../utils/axios';
 import IUser from '../entities/IUser';
 import IRoom from '../entities/IRoom';
@@ -47,10 +47,12 @@ function Main() {
   const itemList = roomList?.map((room) => {
     return (
       <li>
-        <div>
-          <h3>{room.roomTitle}</h3>
-          <h4>{room.roomSubtitle}</h4>
-        </div>
+        <Link to={`/rooms/${room.id}`}>
+          <div>
+            <h3>{room.roomTitle}</h3>
+            <h4>{room.roomSubtitle}</h4>
+          </div>
+        </Link>
       </li>
     );
   });
