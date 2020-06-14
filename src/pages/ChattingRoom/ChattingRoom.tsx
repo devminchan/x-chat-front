@@ -18,6 +18,8 @@ function ChattingRoom({ match }: { match: RoomParamMatch }) {
   const [roomInfo, setRoomInfo] = useState<IRoom>();
   const [chatRecords, setChatRecords] = useState<IChatRecord[]>();
   const [socket, setSocket] = useState<SocketIOClient.Socket>();
+  const [message, setMessage] = useState('');
+
   const ulChatRecords = React.useRef<
     HTMLUListElement
   >() as React.MutableRefObject<HTMLUListElement>;
@@ -68,6 +70,16 @@ function ChattingRoom({ match }: { match: RoomParamMatch }) {
     }
   };
 
+  const onInputMessage = (e: any) => {
+    setMessage(e.target.value);
+  };
+
+  const onSendMessage = (e: any) => {
+    e.preventDefault();
+    // eslint-disable-next-line no-unused-expressions
+    socket?.send(message);
+  };
+
   useEffect(() => {
     getRoomInfo()
       .then(getChatRecords)
@@ -110,6 +122,14 @@ function ChattingRoom({ match }: { match: RoomParamMatch }) {
         <ul className="chat-container" ref={ulChatRecords}>
           {chatRecordElements}
         </ul>
+        <div>
+          <form>
+            <input type="text" onInput={onInputMessage} />
+            <button type="submit" onClick={onSendMessage}>
+              전송
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   );
