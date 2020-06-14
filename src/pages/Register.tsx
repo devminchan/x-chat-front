@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import axios from '../utils/axios';
 
 type CreateUserDto = {
@@ -67,6 +67,7 @@ function Register() {
     <div>
       <header>
         <h1>회원가입</h1>
+        <Link to="/">메인화면</Link>
       </header>
       <div>
         <form>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { match as Match } from 'react-router-dom';
+import { match as Match, Link } from 'react-router-dom';
 import socketio from 'socket.io-client';
 
 import axios from '../../utils/axios';
@@ -138,6 +138,7 @@ function ChattingRoom({ match }: { match: RoomParamMatch }) {
       <header>
         <h1>{roomInfo?.roomTitle}</h1>
         <h3>{roomInfo?.roomSubtitle}</h3>
+        <Link to="/">메인화면</Link>
       </header>
       <div className="room-body">
         <ul className="chat-container" ref={ulChatRecords}>

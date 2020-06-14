@@ -65,6 +65,7 @@ function Login() {
     <div>
       <header>
         <h1>로그인</h1>
+        <Link to="/">메인화면</Link>
       </header>
       <div>
         <form>
