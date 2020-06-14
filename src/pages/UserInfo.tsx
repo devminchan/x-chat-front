@@ -16,15 +16,15 @@ function UserInfo() {
   const [newUsername, setNewUsername] = useState('');
   const [newPassword, setNewPassrod] = useState('');
 
-  const onEditButtonClick = (e: any) => {
+  const handleEditButtonClick = (e: any) => {
     setIsEditing(true);
   };
 
-  const onInputNewUsername = (e: any) => {
+  const handleNewUsernameInput = (e: any) => {
     setNewUsername(e.target.value);
   };
 
-  const onInputNewPassword = (e: any) => {
+  const handleNewPasswordInput = (e: any) => {
     setNewPassrod(e.target.value);
   };
 
@@ -67,13 +67,13 @@ function UserInfo() {
         <input
           type="text"
           placeholder="새 닉네임 입력"
-          onChange={onInputNewUsername}
+          onChange={handleNewUsernameInput}
           value={newUsername}
         />
         <input
           type="password"
           placeholder="새 비밀번호 입력"
-          onChange={onInputNewPassword}
+          onChange={handleNewPasswordInput}
           value={newPassword}
         />
         <button type="submit" onClick={onEditDone}>
@@ -86,7 +86,7 @@ function UserInfo() {
       <p>
         닉네임 {userState?.username} ({userState?.id})
       </p>
-      <button type="button" onClick={onEditButtonClick}>
+      <button type="button" onClick={handleEditButtonClick}>
         유저 정보 수정하기
       </button>
     </div>

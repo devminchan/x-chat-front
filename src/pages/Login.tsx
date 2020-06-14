@@ -69,10 +69,10 @@ function Login() {
       </header>
       <div>
         <form>
-          <input type="text" onInput={handleIdInput} value={loginId} />
+          <input type="text" onChange={handleIdInput} value={loginId} />
           <input
             type="password"
-            onInput={handlePasswordInput}
+            onChange={handlePasswordInput}
             value={password}
           />
           <button onClick={handleLogin} type="submit">

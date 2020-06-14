@@ -73,25 +73,25 @@ function Register() {
         <form>
           <input
             type="text"
-            onInput={handleIdInput}
+            onChange={handleIdInput}
             value={loginId}
             placeholder="아이디"
           />
           <input
             type="password"
-            onInput={handlePasswordInput}
+            onChange={handlePasswordInput}
             value={password}
             placeholder="패스워드"
           />
           <input
             type="password"
-            onInput={handleRepasswordInput}
+            onChange={handleRepasswordInput}
             value={repassword}
             placeholder="패스워드 확인"
           />
           <input
             type="text"
-            onInput={handleUsernameInput}
+            onChange={handleUsernameInput}
             value={username}
             placeholder="닉네임"
           />

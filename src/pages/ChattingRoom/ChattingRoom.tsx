@@ -82,11 +82,11 @@ function ChattingRoom({ match }: { match: RoomParamMatch }) {
     }, 0);
   };
 
-  const onInputMessage = (e: any) => {
+  const handleMessageInput = (e: any) => {
     setMessage(e.target.value);
   };
 
-  const onSendMessageButtonClicked = (e: any) => {
+  const handleSendButtonClick = (e: any) => {
     e.preventDefault();
     // eslint-disable-next-line no-unused-expressions
     sendMessage();
@@ -146,8 +146,8 @@ function ChattingRoom({ match }: { match: RoomParamMatch }) {
         </ul>
         <div>
           <form>
-            <input type="text" onChange={onInputMessage} value={message} />
-            <button type="submit" onClick={onSendMessageButtonClicked}>
+            <input type="text" onChange={handleMessageInput} value={message} />
+            <button type="submit" onClick={handleSendButtonClick}>
               전송
             </button>
           </form>
