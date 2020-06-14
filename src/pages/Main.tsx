@@ -37,6 +37,11 @@ function Main() {
     }
   };
 
+  const handleLogout = () => {
+    localStorage.setItem('token', '');
+    window.location.href = '/';
+  };
+
   useEffect(() => {
     fetchUserInfo()
       .then(getRoomList)
@@ -60,8 +65,11 @@ function Main() {
   return (
     <div>
       <header>
-        <h1>#20대 고민 상담</h1>
+        <h1>Dev chat</h1>
         <Link to="/users/me">내 정보 보기</Link>
+        <button type="button" onClick={handleLogout}>
+          로그아웃
+        </button>
       </header>
       <div>
         <ul>{itemList}</ul>
