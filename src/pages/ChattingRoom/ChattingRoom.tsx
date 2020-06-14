@@ -70,14 +70,26 @@ function ChattingRoom({ match }: { match: RoomParamMatch }) {
     }
   };
 
+  const sendMessage = () => {
+    setTimeout(() => {
+      if (!message && message === '' && message.trim().length === 0) {
+        return;
+      }
+
+      // eslint-disable-next-line no-unused-expressions
+      socket?.emit('message', message);
+      setMessage('');
+    }, 0);
+  };
+
   const onInputMessage = (e: any) => {
     setMessage(e.target.value);
   };
 
-  const onSendMessage = (e: any) => {
+  const onSendMessageButtonClicked = (e: any) => {
     e.preventDefault();
     // eslint-disable-next-line no-unused-expressions
-    socket?.send(message);
+    sendMessage();
   };
 
   useEffect(() => {
@@ -88,12 +100,21 @@ function ChattingRoom({ match }: { match: RoomParamMatch }) {
     // eslint-disable-next-line
   }, []);
 
-  // eslint-disable-next-line
-  socket?.on('message', (data: IChatRecord) => {
-    if (chatRecords) {
-      const newChatRecords = [...chatRecords, data];
-      setChatRecords(newChatRecords);
-    }
+  useEffect(() => {
+    // eslint-disable-next-line
+    socket?.removeAllListeners();
+    // eslint-disable-next-line
+    socket?.on('message', (data: IChatRecord) => {
+      if (chatRecords) {
+        const newChatRecords = [...chatRecords, data];
+        setChatRecords(newChatRecords);
+
+        // eslint-disable-next-line no-unused-expressions
+        ulChatRecords.current?.scrollTo({
+          top: ulChatRecords.current.scrollHeight,
+        });
+      }
+    });
   });
 
   // eslint-disable-next-line no-unused-expressions
@@ -124,8 +145,8 @@ function ChattingRoom({ match }: { match: RoomParamMatch }) {
         </ul>
         <div>
           <form>
-            <input type="text" onInput={onInputMessage} />
-            <button type="submit" onClick={onSendMessage}>
+            <input type="text" onChange={onInputMessage} value={message} />
+            <button type="submit" onClick={onSendMessageButtonClicked}>
               전송
             </button>
           </form>
