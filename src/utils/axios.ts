@@ -1,6 +1,5 @@
 import axios from 'axios';
-
-const SERVER_URL = 'https://api.dev-xchat.com';
+import { SERVER_URL } from './constants';
 
 const accessToken = localStorage.getItem('token');
 
