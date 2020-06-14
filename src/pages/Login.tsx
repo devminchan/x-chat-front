@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import axios from '../utils/axios';
 
 type LoginRequest = {
@@ -78,6 +78,12 @@ function Login() {
             로그인
           </button>
         </form>
+        <p>
+          회원이 아니신가요?
+          <Link to="/register">
+            <span>회원가입</span>
+          </Link>
+        </p>
       </div>
     </div>
   );
