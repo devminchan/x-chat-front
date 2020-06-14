@@ -6,6 +6,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import UserProvider from './providers/UserProvider';
 import ChattingRoom from './pages/ChattingRoom/ChattingRoom';
+import UserInfo from './pages/UserInfo';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/rooms/:roomId" component={ChattingRoom} />
+            <Route exact path="/users/me" component={UserInfo} />
           </Switch>
         </BrowserRouter>
       </UserProvider>

@@ -8,13 +8,13 @@ import UserContext from '../context/UserContext';
 
 function Main() {
   const history = useHistory();
-  const { state, setState } = useContext(UserContext);
+  const { setUserState } = useContext(UserContext);
   const [roomList, setRoomList] = useState<IRoom[]>();
 
   const fetchUserInfo = async () => {
     try {
       const user = (await axios.get('/users/me')).data as IUser;
-      setState(user);
+      setUserState(user);
     } catch (e) {
       if (e.response && e.response.data.statusCode === 401) {
         history.push('/login');
@@ -61,9 +61,7 @@ function Main() {
     <div>
       <header>
         <h1>#20대 고민 상담</h1>
-        <div>
-          Name: {state?.username} ({state?.loginUserId})
-        </div>
+        <Link to="/users/me">내 정보 보기</Link>
       </header>
       <div>
         <ul>{itemList}</ul>

@@ -8,8 +8,8 @@ function UserProvider(props: any) {
   const [user, setUser] = useState({});
 
   const value = {
-    state: user,
-    setState: (userInfo: IUser) => {
+    userState: user,
+    setUserState: (userInfo: IUser) => {
       setUser(userInfo);
     },
   } as IUserState;
